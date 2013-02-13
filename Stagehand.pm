@@ -1,4 +1,4 @@
-package Stagehand;
+package Stagehand::Stagehand;
 
 use strict;
 use Exporter;
