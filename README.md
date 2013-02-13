@@ -1,4 +1,5 @@
-Sugar-Plum-Fairy
+Stagehand
 ================
+A set of helper functions for Dancer and DBIx::Class.
 
-Adding a little sugar to Dancer
+Stagehand provides a helping hand to Dancer.
