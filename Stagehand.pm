@@ -8,6 +8,7 @@ $VERSION = 1.00;
 @ISA = qw(Exporter);
 @EXPORT = qw(model fillinform);
 
+use Dancer ':syntax';
 use Dancer::Plugin::DBIC 'schema';
 
 sub model {
