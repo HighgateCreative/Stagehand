@@ -20,7 +20,8 @@ sub model {
 sub fillinform {
    my $template = shift;
    my $fifvalues = shift;
-   my $html = template $template, $fifvalues;
+   my $aux = shift;
+   my $html = template $template, $fifvalues, $aux;
    return HTML::FillInForm->fill( \$html, $fifvalues );
 }
 
