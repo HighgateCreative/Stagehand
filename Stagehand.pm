@@ -79,13 +79,15 @@ sub combine_errors {
 
    my $msg;
    
-   if ($msg1->{errors} and $msg2->{errors}) {
+   if ((ref $msg1 ne 'ARRAY' and $msg1->{errors}) and (ref $msg2 ne 'ARRAY' and $msg2->{errors})) {
       my @errors = ( @{$msg1->{errors}}, @{$msg2->{errors}} );
       $msg->{errors} = \@errors;
-   } elsif ($msg1->{errors}) {
+   } elsif (ref $msg1 ne 'ARRAY' and $msg1->{errors}) {
       $msg = $msg1;
-   } else {
+   } elsif (ref $msg2 ne 'ARRAY' and $msg2->{errors}) {
       $msg = $msg2;
+   } else {
+      $msg = {};
    }
    return $msg;
 
