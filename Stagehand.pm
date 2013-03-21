@@ -6,7 +6,7 @@ use vars qw($VERSION @ISA @EXPORT);
 
 $VERSION = 1.00;
 @ISA = qw(Exporter);
-@EXPORT = qw(model fillinform upload_file);
+@EXPORT = qw(model fillinform upload_file combine_errors);
 
 use Dancer ':syntax';
 use Dancer::Plugin::DBIC 'schema';
@@ -70,6 +70,25 @@ sub upload_file {
    #chown 33, 1001, "$upload_dir/$sub_dir" or return ($filename, 'chown failed', $upload->size);
 
    return ($filename, '', $upload->size);
+}
+
+# Function for combining error returns
+sub combine_errors {
+   my $msg1 = shift;
+   my $msg2 = shift;
+
+   my $msg;
+   
+   if ($msg1->{errors} and $msg2->{errors}) {
+      my @errors = ( @{$msg1->{errors}}, @{$msg2->{errors}} );
+      $msg->{errors} = \@errors;
+   } elsif ($msg1->{errors}) {
+      $msg = $msg1;
+   } else {
+      $msg = $msg2;
+   }
+   return $msg;
+
 }
 
  1;
