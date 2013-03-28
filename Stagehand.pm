@@ -6,7 +6,7 @@ use vars qw($VERSION @ISA @EXPORT);
 
 $VERSION = 1.00;
 @ISA = qw(Exporter);
-@EXPORT = qw(model fillinform upload_file combine_errors);
+@EXPORT = qw(model fillinform upload_file combine_errors parameter);
 
 use Dancer ':syntax';
 use Dancer::Plugin::DBIC 'schema';
@@ -91,6 +91,23 @@ sub combine_errors {
    }
    return $msg;
 
+}
+
+# Parameter
+# Returns the first parameter value retrieved for a given parameter name
+sub parameter {
+   my $param_name = shift;
+   my %params_route = params('route');
+   my %params_body = params('body');
+   my %params_query = params('query');
+
+   if ($params_route{$param_name}) {
+      return $params_route{$param_name};
+   } elsif ($params_body{$param_name}) {
+      return $params_body{$param_name};
+   } else {
+      return $params_query{$param_name};
+   }
 }
 
  1;
