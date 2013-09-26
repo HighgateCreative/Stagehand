@@ -21,8 +21,13 @@ sub fillinform {
    my $template = shift;
    my $fifvalues = shift;
    my $aux = shift;
+   my $form = shift;
    my $html = template $template, $fifvalues, $aux;
-   return HTML::FillInForm->fill( \$html, $fifvalues );
+   if ( $form ) {
+      return HTML::FillInForm->fill( \$html, $fifvalues, target => $form );
+   } else {
+      return HTML::FillInForm->fill( \$html, $fifvalues );
+   }
 }
 
 sub upload_file {
