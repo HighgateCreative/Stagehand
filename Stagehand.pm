@@ -30,6 +30,8 @@ sub upload_file {
 
    my ($upload, $max, $upload_dir, $sub_dir, $filename, $overwrite) = @_; #upload is the $query->param
 
+   $upload_dir = setting('appdir')."/".$upload_dir;
+
    if (not defined $overwrite) { # Set default to 0
       $overwrite = 1;
    }
